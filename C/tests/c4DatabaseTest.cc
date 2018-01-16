@@ -185,7 +185,7 @@ N_WAY_TEST_CASE_METHOD(C4DatabaseTest, "Database CreateRawDoc", "[Database][C]")
     REQUIRE(error.code == (int)kC4ErrorNotFound);
 }
 
-
+#ifdef COUCHBASE_ENTERPRISE
 N_WAY_TEST_CASE_METHOD(C4DatabaseTest, "Database Rekey", "[Database][blob][C]") {
     createNumberedDocs(99);
 
@@ -223,6 +223,7 @@ N_WAY_TEST_CASE_METHOD(C4DatabaseTest, "Database Rekey", "[Database][blob][C]") 
     REQUIRE(memcmp(c4db_getConfig(db)->encryptionKey.bytes, newKey.bytes, 32) == 0);
     reopenDB();
 }
+#endif
 
 
 N_WAY_TEST_CASE_METHOD(C4DatabaseTest, "Database AllDocs", "[Database][C]") {
