@@ -214,6 +214,7 @@ bool c4error_mayBeTransient(C4Error err) C4API {
         503, /* Service Unavailable */
         504, /* Gateway Timeout */
         websocket::kCodeGoingAway,
+        websocket::kCodeAbnormal,
         0};
     static ErrorSet kTransient = { // indexed by C4ErrorDomain
         nullptr,
@@ -232,7 +233,8 @@ bool c4error_mayBeNetworkDependent(C4Error err) C4API {
 #ifndef _MSC_VER
         EHOSTDOWN, // Doesn't exist on Windows
 #endif
-        EHOSTUNREACH,EADDRNOTAVAIL, 0};
+        EHOSTUNREACH,EADDRNOTAVAIL,
+        EPIPE, 0};
 
     static CodeList kUnreachableNetwork = {
         kC4NetErrDNSFailure,
